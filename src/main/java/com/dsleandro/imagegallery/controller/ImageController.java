@@ -27,11 +27,11 @@ public class ImageController {
 
 
     @GetMapping("/")
-	public String listUploadedFiles(Model model) throws IOException {
+	public String displayImages(Model model) throws IOException {
 
 		model.addAttribute("images", storageService.loadAll().map(
 				path -> MvcUriComponentsBuilder.fromMethodName(ImageController.class,
-						"serveFile", path.getFileName().toString()).build().toUri().toString())
+						"serveImage", path.getFileName().toString()).build().toUri().toString())
 				.collect(Collectors.toList()));
 
 		return "index";
@@ -39,7 +39,7 @@ public class ImageController {
 
     @GetMapping("/images/{filename:.+}")
 	@ResponseBody
-	public ResponseEntity<Resource> serveFile(@PathVariable String filename) {
+	public ResponseEntity<Resource> serveImage(@PathVariable String filename) {
 
 		Resource file = storageService.loadAsResource(filename);
 		return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,
