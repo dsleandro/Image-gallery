@@ -15,8 +15,8 @@ public class Image {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "ID")
-    private String id;
+    @Column(name = "id")
+    private long id;
 
     @Column(name = "path")
     private String path;
