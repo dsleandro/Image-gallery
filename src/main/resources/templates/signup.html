@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="/signup" method="post" th:object="${user}">
+        <input type="text" th:field="*{username}"><br>
+        <input type="text" th:field="*{password}"><br><br>
+        <button type="submit">Sign up</button>
+    </form>
+</body>
+</html>
