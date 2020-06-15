@@ -6,9 +6,9 @@
     <title>Sign in</title>
 </head>
 <body>
-    <form action="/signin" method="post">
-        <input type="text" name="username" placeholder="Username">
-        <input type="text" name="password" placeholder="Password">
+    <form action="/signin" method="post" th:object="${user}">
+        <input type="text" th:field="*{username}" placeholder="Username">
+        <input type="text" th:field="*{password}" placeholder="Password">
         <button type="submit">Sign in</button>
     </form>
 </body>

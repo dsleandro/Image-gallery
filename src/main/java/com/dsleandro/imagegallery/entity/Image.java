@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "images")
@@ -18,6 +19,7 @@ public class Image {
     @Column(name = "id")
     private long id;
 
+    @NotBlank
     @Column(name = "path")
     private String path;
     

@@ -11,6 +11,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+import javax.validation.constraints.Pattern.Flag;
 
 @Entity
 @Table(name = "user")
@@ -21,9 +25,13 @@ public class User {
     @Column(name = "id")
     private long id;
 
+    @Pattern(regexp = "^(?!.*\\.$)(?!.*\\.\\.)(?!\\..*)[a-z0-9_.]{3,15}$", flags = Flag.MULTILINE)
+    @NotBlank
     @Column(name = "username")
     private String username;
 
+    @NotBlank
+    @Size(min = 8, max = 50)
     @Column(name = "password")
     private String password;
 
