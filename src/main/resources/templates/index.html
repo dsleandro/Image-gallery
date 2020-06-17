@@ -8,6 +8,12 @@
 </head>
 
 <body>
+    <form action="/" method="post" enctype="multipart/form-data" accept="image/*">
+        <h3>upload new image</h3>
+        <input type="file" name="file" required>
+        <button type="submit">Upload</button>
+    </form>
+
     <div th:each=" image : ${images}">
         <img th:src="${image}">
     </div>
