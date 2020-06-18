@@ -6,7 +6,12 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.util.List;
 import java.util.stream.Stream;
+
+import com.dsleandro.imagegallery.entity.Image;
+import com.dsleandro.imagegallery.entity.User;
+import com.dsleandro.imagegallery.repository.ImageRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
@@ -17,6 +22,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class FileSystemStorageService implements StorageService {
+
+	@Autowired
+	private ImageRepository imageRepository;
 
 	private final Path rootLocation;
 
@@ -46,9 +54,12 @@ public class FileSystemStorageService implements StorageService {
 	}
 
 	@Override
-	public Stream<Path> loadAll() {
+	public Stream<Path> loadAll(User user) {
 		try {
-			return Files.walk(this.rootLocation, 1).filter(path -> !path.equals(this.rootLocation))
+			List<Image> images = imageRepository.findByUser(user);
+
+			//returns stream of image paths that match with logged user
+			return Files.walk(this.rootLocation, 1).filter(path -> !path.equals(this.rootLocation)).filter(path -> images.stream().anyMatch(img -> img.getPath().equals(path.toString())))
 					.map(this.rootLocation::relativize);
 		} catch (IOException e) {
 			throw new StorageException("Failed to read stored files", e);

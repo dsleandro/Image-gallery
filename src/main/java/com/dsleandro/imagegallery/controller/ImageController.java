@@ -37,19 +37,24 @@ public class ImageController {
     @Autowired
     private UserRepository userRepository;
 
-
     @GetMapping("/")
-    public String displayImages(Model model) throws IOException {
+    public String displayImages(Model model, Principal pUser) throws IOException {
+        try {
+            User user = userRepository.findByUsername(pUser.getName()).orElseThrow(() -> new Exception("user not found"));
 
-        model.addAttribute("images",
-                storageService.loadAll()
+            model.addAttribute("images",
+                storageService.loadAll(user)
                         .map(path -> MvcUriComponentsBuilder
-                                .fromMethodName(ImageController.class, "serveImage",
-                                path.getFileName().toString())
+                                .fromMethodName(ImageController.class, "serveImage", path.getFileName().toString())
                                 .build().toUri().toString())
                         .collect(Collectors.toList()));
 
         return "index";
+
+        } catch (Exception e) {
+            return "error";
+        }
+               
     }
 
     @GetMapping("/images/{filename:.+}")
@@ -72,7 +77,7 @@ public class ImageController {
 
             // save path of image at database
             try {
-                //parse MultipartFile to Image entity
+                // parse MultipartFile to Image entity
                 Image image = parseToImage(file, user);
 
                 imageRepository.save(image);
