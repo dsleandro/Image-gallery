@@ -6,9 +6,11 @@
     <title>Sign up</title>
 </head>
 <body>
-    <form action="/signup" method="post" th:object="${user}">
-        <input type="text" th:field="*{username}"><br>
-        <input type="text" th:field="*{password}"><br><br>
+    <form action="#" th:action="@{/signup}" method="post" th:object="${user}">
+        <input type="text" th:field="*{username}">
+        <div th:if="${#fields.hasErrors('username')}" th:errors="*{username}">invaild username</div>
+        <input type="text" th:field="*{password}">
+        <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}">invaild password</div>
         <button type="submit">Sign up</button>
     </form>
 </body>

@@ -27,11 +27,11 @@ public class User {
 
     @Pattern(regexp = "^(?!.*\\.$)(?!.*\\.\\.)(?!\\..*)[a-z0-9_.]{3,15}$", flags = Flag.MULTILINE)
     @NotBlank
-    @Column(name = "username")
+    @Column(name = "username", unique = true)
     private String username;
 
     @NotBlank
-    @Size(min = 8, max = 50)
+    @Size(min = 8, max = 255)
     @Column(name = "password")
     private String password;
 

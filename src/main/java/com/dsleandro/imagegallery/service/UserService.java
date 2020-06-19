@@ -59,14 +59,15 @@ public class UserService {
 
     }
 
-    private boolean existUser(long userId) {
+    public boolean existUser(long userId) {
 
-        boolean existentUser = userRepository.findById(userId).isPresent();
+        return userRepository.findById(userId).isPresent();
 
-        if (existentUser)
-            return true;
-        else
-            return false;
+    }
+
+    public boolean existUser(String username) {
+
+       return userRepository.findByUsername(username).isPresent();
 
     }
 

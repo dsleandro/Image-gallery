@@ -31,27 +31,10 @@ public class UserController {
         // logout user if it is logged
         if (user != null) {
             return "redirect:/logout";
-        } else {
-            model.addAttribute("user", new User());
-            return "signin";
-        }
-    }
-
-    @PostMapping("/signin")
-    public String signin(@Valid @ModelAttribute("user") User user, Model model, BindingResult bindingResult) {
-
-        if (bindingResult.hasErrors()) {
-            return "/signin";
         }
 
-        User loggedUser = userService.getUser(user.getUsername(), user.getPassword());
-
-        if (loggedUser != null) {
-            return "redirect:/";
-        }
-
-        model.addAttribute("loginError", "Invalid username or password");
-        return "redirect:/signin";
+        model.addAttribute("user", new User());
+        return "signin";
 
     }
 
@@ -60,17 +43,24 @@ public class UserController {
 
         if (user != null) {
             return "redirect:/logout";
-        } else {
-            model.addAttribute("user", new User());
-            return "signup";
         }
+
+        model.addAttribute("user", new User());
+        return "signup";
+
     }
 
     @PostMapping("/signup")
-    public String signup(@ModelAttribute("user") User user, BindingResult bindingResult) {
+    public String signup(@Valid @ModelAttribute("user") User user, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
-            return "/signup";
+            return "signup";
+        }
+
+        // if username exist, return to signup
+        if (userService.existUser(user.getUsername())) {
+            bindingResult.rejectValue("username", "error.user", "username already exists");
+            return "signup";
         }
 
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
