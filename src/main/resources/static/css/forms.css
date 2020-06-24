@@ -1,0 +1,39 @@
+html, body{
+    background-color: #007bff !important;
+}
+
+.formContainer{
+    border-radius: 10px;
+    padding: 3% 5% 2% 5%;
+    background-color: #fff;
+    width: 40%;
+    margin: 12% auto 0 auto;
+}
+
+.formField{
+    margin: 10px 0;
+    width: 100%;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.serverValidation{
+    width: 100%;
+    margin-top: .25rem;
+    font-size: 80%;
+    color: #dc3545;
+}
+
+#submitBtn{
+    margin-top: 20px;
+    width: 40%;
+}
+
+/* Font awsome icons */
+.icon{
+    text-align: center;
+}
