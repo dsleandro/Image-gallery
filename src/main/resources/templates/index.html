@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
+    <script src="https://kit.fontawesome.com/5db52d2294.js" crossorigin="anonymous"></script>
+
 </head>
 
 <body>
@@ -27,7 +29,8 @@
                     <h3 class="modal-title">Upload new image</h3>
                 </div>
                 <div class="modal-body">
-                    <form id="uploadForm" action="/" method="post" enctype="multipart/form-data" accept="image/*" class="form-group d-flex justify-content-center">
+                    <form id="uploadForm" action="/" method="post" enctype="multipart/form-data" accept="image/*"
+                        class="form-group d-flex justify-content-center">
 
                         <label class="file">
                             <input type="file" id="file" name="file" required>
@@ -44,6 +47,9 @@
         </div>
     </div>
 
+    <!-- Navbar -->
+    <nav th:insert="navbar.html :: nav"></nav>
+
     <!-- Gallery content -->
     <div class="gallery">
         <div th:each=" image : ${images}" class="col-xs-6 col-md-3 imgContainer">
@@ -53,12 +59,13 @@
         </div>
     </div>
 
-<!-- JS and jQuery -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-    crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
-    integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
-    crossorigin="anonymous"></script>
+    <!-- JS and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
 </body>
+
 </html>

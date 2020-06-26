@@ -48,6 +48,8 @@ public class ImageController {
                                 .fromMethodName(ImageController.class, "serveImage", path.getFileName().toString())
                                 .build().toUri().toString())
                         .collect(Collectors.toList()));
+        
+            model.addAttribute("username", pUser.getName());
 
         return "index";
 
