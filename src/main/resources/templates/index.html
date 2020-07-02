@@ -14,6 +14,29 @@
 
     <script src="https://kit.fontawesome.com/5db52d2294.js" crossorigin="anonymous"></script>
 
+    <script>
+        function displayModalCarousel(clicked) {
+
+            //Reset all class attributes of items
+            var items = document.getElementsByClassName("carousel-item");
+            for (let i = 0; i < items.length; i++) {
+
+                items[i].className = "carousel-item";
+
+            }
+
+            //add active class
+            var element = document.getElementsByClassName("carousel-item")[clicked];
+
+            element.className += " active";
+
+            document.getElementsByClassName("modalCarousel")[0].style.display = "flex"
+        }
+
+        function hideCarousel() {
+            document.getElementsByClassName("modalCarousel")[0].style.display = "none"
+        }
+    </script>
 </head>
 
 <body>
@@ -22,7 +45,7 @@
         data-target=".bs-example-modal-lg">Upload
         Image</button>
 
-    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+    <div class="modal fade bs-example-modal-lg" tabi="-1" role="dialog" aria-labelledby="myLargeModalLabel">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -50,13 +73,33 @@
     <!-- Navbar -->
     <nav th:insert="navbar.html :: nav"></nav>
 
-    <!-- Gallery content -->
+    <!-- Gallery thumbnails -->
     <div class="gallery">
-        <div th:each=" image : ${images}" class="col-xs-6 col-md-3 imgContainer">
-            <a th:href="${image}">
-                <img th:src="${image}" class="img-fluid img-thumbnail">
-            </a>
+        <div th:id="${status.index}" onclick="displayModalCarousel(this.id)" th:each=" image, status : ${images}"
+            class="col-4 col-md-2 imgContainer">
+            <div>
+                <img th:src="${image}" class="img-fluid img-thumbnail imgThumb">
+            </div>
         </div>
+    </div>
+
+    <!-- Gallery carousel -->
+    <div id="carouselExampleControls" class="carousel slide modalCarousel" data-interval="false" data-ride="carousel"
+        tabi="-1">
+        <span onclick="hideCarousel()" id="exit-icon"><i class="far fa-times-circle fa-5x"></i></span>
+        <div class="carousel-inner">
+            <div th:each=" image, status: ${images}" class="carousel-item">
+                <img class="d-block mx-auto" th:src="${image}">
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
     </div>
 
     <!-- JS and jQuery -->

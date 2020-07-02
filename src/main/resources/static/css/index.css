@@ -91,7 +91,7 @@
   transition: 0.5s all ease;
 }
 
-.imgContainer a {
+.imgContainer div {
   display: flex;
   align-content: center;
   justify-content: center;
@@ -103,11 +103,51 @@
   transform: scale(1.05);
 }
 
-img {
+.imgThumb {
   height: 100%;
   min-width: 100%;
 }
 
 .dropdown-toggle{
   width: 10em;
+}
+
+/* Modal carousel */
+
+.carousel-item-next, .carousel-item-prev, .carousel-item.active{
+  display: flex !important;
+  align-items: center;
+}
+
+.carousel-inner{
+  display: flex;
+  align-content: center;
+  vertical-align: middle;
+  height: 90%;
+  width: 90%;
+}
+
+.modalCarousel{
+  display: none;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.9);
+  z-index: 1000000;
+  position: absolute !important;
+  top:0; bottom: 0; right: 0; left: 0;
+}
+
+.carousel-item img{
+  max-width: 90%;
+}
+
+/* ICONS */
+#exit-icon{
+  z-index: 10000000;
+  position: absolute;
+  top: 20px; right: 5%;
+  color: #fff;
+}
+
+#exit-icon:hover{
+  color: rgb(189, 188, 188);
 }
