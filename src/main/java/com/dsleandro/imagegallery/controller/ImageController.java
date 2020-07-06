@@ -3,6 +3,7 @@ package com.dsleandro.imagegallery.controller;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.security.Principal;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import com.dsleandro.imagegallery.entity.Image;
@@ -28,6 +29,8 @@ import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBui
 @Controller
 public class ImageController {
 
+    UUID uuid = UUID.randomUUID();
+
     @Autowired
     private StorageService storageService;
 
@@ -40,23 +43,24 @@ public class ImageController {
     @GetMapping("/")
     public String displayImages(Model model, Principal pUser) throws IOException {
         try {
-            User user = userRepository.findByUsername(pUser.getName()).orElseThrow(() -> new Exception("user not found"));
+            User user = userRepository.findByUsername(pUser.getName())
+                    .orElseThrow(() -> new Exception("user not found"));
 
             model.addAttribute("images",
-                storageService.loadAll(user)
-                        .map(path -> MvcUriComponentsBuilder
-                                .fromMethodName(ImageController.class, "serveImage", path.getFileName().toString())
-                                .build().toUri().toString())
-                        .collect(Collectors.toList()));
-        
+                    storageService.loadAll(user)
+                            .map(path -> MvcUriComponentsBuilder
+                                    .fromMethodName(ImageController.class, "serveImage", path.getFileName().toString())
+                                    .build().toUri().toString())
+                            .collect(Collectors.toList()));
+
             model.addAttribute("username", pUser.getName());
 
-        return "index";
+            return "index";
 
         } catch (Exception e) {
             return "error";
         }
-               
+
     }
 
     @GetMapping("/images/{filename:.+}")
@@ -74,21 +78,25 @@ public class ImageController {
 
         if (isImage(file)) {
 
-            // save image at server
-            storageService.store(file);
-
-            // save path of image at database
             try {
-                // parse MultipartFile to Image entity
-                Image image = parseToImage(file, user);
+                // set an ID to image with its extension
+                String fileId = uuid.toString() + file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
 
+                // save image on server
+                storageService.store(fileId, file.getBytes());
+
+                // parse MultipartFile to Image entity
+                Image image = parseToImage(fileId, user);
+
+                // save path of image in database
                 imageRepository.save(image);
 
+                return "redirect:/";
+
             } catch (Exception e) {
+                e.printStackTrace();
                 return "error";
             }
-
-            return "redirect:/";
 
         } else {
             return "error";
@@ -107,9 +115,9 @@ public class ImageController {
 
     }
 
-    public Image parseToImage(MultipartFile file, Principal user) throws Exception {
+    public Image parseToImage(String fileId, Principal user) throws Exception {
 
-        Path path = storageService.getPath(file.getOriginalFilename());
+        Path path = storageService.getPath(fileId);
 
         User username = userRepository.findByUsername(user.getName())
                 .orElseThrow(() -> new Exception("user not found"));

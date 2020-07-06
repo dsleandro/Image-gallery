@@ -17,8 +17,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
-import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class FileSystemStorageService implements StorageService {
@@ -34,10 +32,11 @@ public class FileSystemStorageService implements StorageService {
 	}
 
 	@Override
-	public void store(MultipartFile file) {
-		String filename = StringUtils.cleanPath(file.getOriginalFilename());
+	public void store(String filename, byte[] fileBytes) {
 		try {
-			if (file.isEmpty()) {
+
+			//Check if is not an empty file
+			if (!(fileBytes != null  && fileBytes.length > 0)) {
 				throw new StorageException("Failed to store empty file " + filename);
 			}
 			if (filename.contains("..")) {
@@ -46,7 +45,7 @@ public class FileSystemStorageService implements StorageService {
 						"Cannot store file with relative path outside current directory " + filename);
 			}
 
-			Files.write(getPath(filename), file.getBytes(), StandardOpenOption.CREATE);
+			Files.write(getPath(filename), fileBytes, StandardOpenOption.CREATE);
 
 		} catch (IOException e) {
 			throw new StorageException("Failed to store file " + filename, e);
