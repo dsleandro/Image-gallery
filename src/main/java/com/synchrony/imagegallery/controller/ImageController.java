@@ -1,16 +1,10 @@
-package com.dsleandro.imagegallery.controller;
+package com.synchrony.imagegallery.controller;
 
 import java.io.IOException;
 import java.nio.file.Path;
 import java.security.Principal;
 import java.util.UUID;
 import java.util.stream.Collectors;
-
-import com.dsleandro.imagegallery.entity.Image;
-import com.dsleandro.imagegallery.entity.User;
-import com.dsleandro.imagegallery.repository.ImageRepository;
-import com.dsleandro.imagegallery.repository.UserRepository;
-import com.dsleandro.imagegallery.storage.StorageService;
 
 import org.springframework.core.io.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +19,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
+
+import com.synchrony.imagegallery.entity.Image;
+import com.synchrony.imagegallery.entity.User;
+import com.synchrony.imagegallery.repository.ImageRepository;
+import com.synchrony.imagegallery.repository.UserRepository;
+import com.synchrony.imagegallery.storage.StorageService;
 
 @Controller
 public class ImageController {

@@ -1,4 +1,4 @@
-package com.dsleandro.imagegallery.entity;
+package com.synchrony.imagegallery.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

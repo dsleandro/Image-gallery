@@ -1,10 +1,10 @@
-package com.dsleandro.imagegallery.service;
-
-import com.dsleandro.imagegallery.entity.User;
-import com.dsleandro.imagegallery.repository.UserRepository;
+package com.synchrony.imagegallery.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.synchrony.imagegallery.entity.User;
+import com.synchrony.imagegallery.repository.UserRepository;
 
 @Service
 public class UserService {

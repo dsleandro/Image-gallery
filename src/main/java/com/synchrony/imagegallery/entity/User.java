@@ -1,4 +1,4 @@
-package com.dsleandro.imagegallery.entity;
+package com.synchrony.imagegallery.entity;
 
 import java.util.ArrayList;
 import java.util.List;
