@@ -1,11 +1,11 @@
-package com.dsleandro.imagegallery.storage;
+package com.synchrony.imagegallery.storage;
 
 import org.springframework.core.io.Resource;
 
+import com.synchrony.imagegallery.entity.User;
+
 import java.nio.file.Path;
 import java.util.stream.Stream;
-
-import com.dsleandro.imagegallery.entity.User;
 
 public interface StorageService {
 

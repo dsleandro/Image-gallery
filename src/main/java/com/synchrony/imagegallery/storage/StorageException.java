@@ -1,4 +1,4 @@
-package com.dsleandro.imagegallery.storage;
+package com.synchrony.imagegallery.storage;
 
 public class StorageException extends RuntimeException {
 

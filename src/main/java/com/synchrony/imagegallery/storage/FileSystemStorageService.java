@@ -1,4 +1,4 @@
-package com.dsleandro.imagegallery.storage;
+package com.synchrony.imagegallery.storage;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -9,14 +9,14 @@ import java.nio.file.StandardOpenOption;
 import java.util.List;
 import java.util.stream.Stream;
 
-import com.dsleandro.imagegallery.entity.Image;
-import com.dsleandro.imagegallery.entity.User;
-import com.dsleandro.imagegallery.repository.ImageRepository;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
+
+import com.synchrony.imagegallery.entity.Image;
+import com.synchrony.imagegallery.entity.User;
+import com.synchrony.imagegallery.repository.ImageRepository;
 
 @Service
 public class FileSystemStorageService implements StorageService {

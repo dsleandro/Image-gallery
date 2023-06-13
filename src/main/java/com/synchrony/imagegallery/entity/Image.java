@@ -1,4 +1,4 @@
-package com.dsleandro.imagegallery.entity;
+package com.synchrony.imagegallery.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -24,7 +24,7 @@ public class Image {
     private String path;
     
     @ManyToOne(optional = false)
-    @JoinColumn(name = "user")
+    @JoinColumn(name = "user_details")
     private User user;
 
     public Image() {

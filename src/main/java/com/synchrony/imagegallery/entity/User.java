@@ -1,4 +1,4 @@
-package com.dsleandro.imagegallery.entity;
+package com.synchrony.imagegallery.entity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +17,7 @@ import javax.validation.constraints.Size;
 import javax.validation.constraints.Pattern.Flag;
 
 @Entity
-@Table(name = "user")
+@Table(name = "user_details")
 public class User {
 
     @Id
